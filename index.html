@@ -228,12 +228,12 @@ footer{text-align:center;padding:25px;background:#0b6623;color:#d5f5dd;font-size
 <script>
 var isOwner=new URLSearchParams(location.search).get('stats')==='bsf75160';
 if(isOwner){
-  fetch('https://api.counterapi.dev/v1/best-seasoned-firewood/site-visits')
+  fetch('https://abacus.jasoncameron.dev/get/bestseasonedfirewood/visits')
     .then(r=>r.json())
-    .then(d=>{document.getElementById('hits').textContent=(d.count||0).toLocaleString();document.getElementById('ownerstats').style.display='block';})
+    .then(d=>{document.getElementById('hits').textContent=(d.value||0).toLocaleString();document.getElementById('ownerstats').style.display='block';})
     .catch(()=>{document.getElementById('hits').textContent='&mdash;';document.getElementById('ownerstats').style.display='block';});
 }else{
-  fetch('https://api.counterapi.dev/v1/best-seasoned-firewood/site-visits/up').catch(()=>{});
+  fetch('https://abacus.jasoncameron.dev/hit/bestseasonedfirewood/visits').catch(()=>{});
 }
 </script>
 </body>
