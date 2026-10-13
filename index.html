@@ -18,6 +18,8 @@ p,li,div,span,input,select,textarea,label{font-weight:700}
 .hero h2{font-size:1.7rem;font-weight:900;margin-top:12px;color:#fff;text-shadow:1px 2px 5px rgba(0,0,0,.4)}
 .hero p{font-size:1.2rem;margin-top:14px;text-shadow:1px 1px 4px rgba(0,0,0,.4)}
 .hero .badge{display:inline-block;background:#00a651;color:#fff;padding:11px 28px;border-radius:30px;margin-top:26px;font-weight:900;font-size:1.1rem;box-shadow:0 3px 10px rgba(0,0,0,.35)}
+.hero .bookbtn{display:inline-block;background:#fff;color:#ff5e00;text-decoration:none;padding:13px 34px;border-radius:30px;margin-top:16px;margin-left:8px;font-weight:900;font-size:1.1rem;box-shadow:0 3px 10px rgba(0,0,0,.35)}
+.hero .bookbtn:hover{background:#ffe9c9}
 
 section{max-width:1000px;margin:0 auto;padding:55px 20px}
 h2.sec{color:#ff5e00;font-size:2.3rem;font-weight:900;text-align:center;margin-bottom:12px}
@@ -75,6 +77,7 @@ input,select,textarea{width:100%;padding:12px;border:2px solid #ccc;border-radiu
 input:focus,select:focus,textarea:focus{border-color:#ff5e00;outline:none}
 button{display:block;width:100%;margin-top:22px;background:#ff5e00;color:#fff;border:none;padding:15px;font-size:1.2rem;font-weight:900;border-radius:40px;cursor:pointer}
 button:hover{background:#d64f00}
+.total{background:#e6f9ee;border:2px solid #00a651;border-radius:10px;padding:14px;text-align:center;font-size:1.3rem;font-weight:900;color:#007a3d;margin-top:18px}
 
 /* REVIEWS */
 .reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
@@ -105,6 +108,7 @@ footer{text-align:center;padding:25px;background:#0b6623;color:#d5f5dd;font-size
 <h2>Clean, Dry &amp; Naturally Seasoned Split Oak &mdash; Ready to Burn</h2>
 <p>Terrell, TX 75160 &bull; Premium hardwoods delivered and stacked for you</p>
 <div class="badge">FREE LOCAL DELIVERY &amp; STACKING within 65 miles</div>
+<a class="bookbtn" href="#booking">&#128197; Book Delivery Online</a>
 </div>
 
 <!-- PERFECT FOR -->
@@ -157,6 +161,39 @@ footer{text-align:center;padding:25px;background:#0b6623;color:#d5f5dd;font-size
 <div class="note">&#128666; <strong>Farther deliveries welcome!</strong> Beyond our 65-mile radius with a minimum order of a <strong>4' &times; 8' stack or larger</strong>. Call for details.</div>
 </section>
 
+<!-- ONLINE BOOKING -->
+<section id="booking">
+<h2 class="sec">&#128197; Book Your Delivery Online</h2>
+<p class="sub">Pick your wood, size &amp; delivery day &mdash; your order texts straight to us!</p>
+<form onsubmit="event.preventDefault();var p=this.size.value.split('|');var total=parseInt(p[1])+(this.wood.value.indexOf('+$50')>-1?50:0);var msg='NEW FIREWOOD ORDER%0AName: '+encodeURIComponent(this.name.value)+'%0APhone: '+encodeURIComponent(this.phone.value)+'%0AWood: '+encodeURIComponent(this.wood.value)+'%0ASize: '+encodeURIComponent(p[0])+'%0ATotal: $'+total+'%0ADelivery Date: '+encodeURIComponent(this.date.value)+'%0AAddress: '+encodeURIComponent(this.addr.value)+'%0AStack Location/Notes: '+encodeURIComponent(this.notes.value);window.location.href='sms:2149004434?&body='+msg;">
+<label for="bname">Name</label>
+<input id="bname" name="name" required placeholder="Your name">
+<label for="bphone">Phone Number</label>
+<input id="bphone" name="phone" type="tel" required placeholder="Best number to reach you">
+<label for="bwood">Wood Type</label>
+<select id="bwood" name="wood" onchange="updTotal(this.form)">
+<option value="Seasoned Oak (Post, Pin &amp; White)">Seasoned Oak (Post, Pin &amp; White)</option>
+<option value="Pecan +$50">Pecan (+$50)</option>
+<option value="Mesquite +$50">Mesquite (+$50)</option>
+<option value="Hickory +$50">Hickory (+$50)</option>
+</select>
+<label for="bsize">Stack Size</label>
+<select id="bsize" name="size" onchange="updTotal(this.form)">
+<option value="4x4 ft|150">4' x 4' - $150</option>
+<option value="4x8 ft|250">4' x 8' - $250</option>
+<option value="4x16 ft|400" selected>4' x 16' - $400</option>
+</select>
+<label for="bdate">Preferred Delivery Date</label>
+<input id="bdate" name="date" type="date" required>
+<label for="baddr">Delivery Address</label>
+<input id="baddr" name="addr" required placeholder="Street, city, gate code">
+<label for="bnotes">Where should we stack it? (optional)</label>
+<textarea id="bnotes" name="notes" rows="2" placeholder="e.g., side of garage, back porch..."></textarea>
+<div class="total" id="totalbox">Estimated Total: $400</div>
+<button type="submit">&#128197; Book My Delivery</button>
+</form>
+</section>
+
 <!-- DELIVERY BULLETINS -->
 <div class="bulletins">
 <h2>&#128227; Delivery Bulletins</h2>
@@ -172,7 +209,7 @@ footer{text-align:center;padding:25px;background:#0b6623;color:#d5f5dd;font-size
 <!-- QUICK REQUEST FORM -->
 <section>
 <h2 class="sec">Quick Request Form</h2>
-<p class="sub">Fill this out and we'll get right back to you &mdash; or just call!</p>
+<p class="sub">Just have a question? Send it here &mdash; or book above!</p>
 <form onsubmit="event.preventDefault();var msg='Firewood Request%0AName: '+encodeURIComponent(this.name.value)+'%0APhone: '+encodeURIComponent(this.phone.value)+'%0AWood: '+encodeURIComponent(this.wood.value)+'%0ASize: '+encodeURIComponent(this.size.value)+'%0ANotes: '+encodeURIComponent(this.notes.value);window.location.href='sms:2149004434?&body='+msg;">
 <label for="name">Name</label>
 <input id="name" name="name" required placeholder="Your name">
@@ -226,6 +263,11 @@ footer{text-align:center;padding:25px;background:#0b6623;color:#d5f5dd;font-size
 <footer>&copy; Best Seasoned Firewood &bull; Terrell, TX 75160 &bull; Free local delivery &amp; stacking within 65 miles &bull; Farther deliveries welcome (4'&times;8' minimum)</footer>
 
 <script>
+function updTotal(f){
+  var p=f.size.value.split('|');
+  var total=parseInt(p[1])+(f.wood.value.indexOf('+$50')>-1?50:0);
+  document.getElementById('totalbox').textContent='Estimated Total: $'+total;
+}
 var isOwner=new URLSearchParams(location.search).get('stats')==='bsf75160';
 if(isOwner){
   fetch('https://abacus.jasoncameron.dev/get/bestseasonedfirewood/visits')
